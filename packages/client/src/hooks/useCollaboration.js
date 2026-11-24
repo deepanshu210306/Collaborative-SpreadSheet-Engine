@@ -1,6 +1,15 @@
 import { useEffect, useRef, useCallback, useState } from 'react';
 
-const WS_URL = `ws://${window.location.hostname}:3001`;
+function getWsUrl() {
+  if (import.meta.env.VITE_WS_URL) return import.meta.env.VITE_WS_URL;
+  // Local npm run dev → talk to C++ on :3001
+  if (import.meta.env.DEV) {
+    return `ws://${window.location.hostname}:3001`;
+  }
+  // Docker / production → same host, Nginx proxies /ws
+  const proto = window.location.protocol === 'https:' ? 'wss' : 'ws';
+  return `${proto}://${window.location.host}/ws`;
+}
 
 export function useCollaboration({ onMessage, onConnect, onDisconnect }) {
   const wsRef = useRef(null);
@@ -17,7 +26,7 @@ export function useCollaboration({ onMessage, onConnect, onDisconnect }) {
 
   useEffect(() => {
     const connect = () => {
-      const ws = new WebSocket(WS_URL);
+      const ws = new WebSocket(getWsUrl());
       wsRef.current = ws;
 
       ws.onopen = () => {

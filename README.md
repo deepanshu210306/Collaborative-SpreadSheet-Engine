@@ -42,3 +42,18 @@ scripts/     Launches the C++ server
 1. `npm run dev`
 2. Open http://localhost:5173 in two tabs
 3. Edit cells — updates sync through the C++ backend
+
+## Docker (deploy / run without local g++)
+
+**Need:** [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed and running.
+
+```bash
+docker compose up --build
+```
+
+Open: **http://localhost:8080**
+
+Stop:
+```bash
+docker compose down
+```

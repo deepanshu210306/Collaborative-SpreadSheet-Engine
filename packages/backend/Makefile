@@ -1,6 +1,13 @@
 CXX = g++
 CXXFLAGS = -std=c++14 -O2 -Wall -Iinclude
-LDFLAGS = -lws2_32
+
+ifeq ($(OS),Windows_NT)
+  LDFLAGS = -lws2_32
+  TARGET = spreadsheet_server.exe
+else
+  LDFLAGS = -lpthread
+  TARGET = spreadsheet_server
+endif
 
 SRCS = src/main.cpp \
        src/DependencyGraph.cpp \
@@ -10,7 +17,6 @@ SRCS = src/main.cpp \
        src/WebSocketServer.cpp
 
 OBJS = $(SRCS:.cpp=.o)
-TARGET = spreadsheet_server.exe
 
 all: $(TARGET)
 
@@ -21,6 +27,6 @@ src/%.o: src/%.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	del /Q src\*.o $(TARGET) 2>nul || rm -f src/*.o $(TARGET)
+	rm -f src/*.o $(TARGET) spreadsheet_server.exe
 
 .PHONY: all clean
