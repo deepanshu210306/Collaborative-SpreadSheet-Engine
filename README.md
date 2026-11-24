@@ -37,10 +37,4 @@ packages/
   client/   React UI
 ```
 
-## Docker
 
-```bash
-docker compose up --build
-```
-
-Open: **http://localhost:3001**
