@@ -1,0 +1,7 @@
+node_modules/
+dist/
+*.o
+*.obj
+*.exe
+.DS_Store
+*.log

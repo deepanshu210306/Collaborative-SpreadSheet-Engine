@@ -1,0 +1,18 @@
+{
+  "name": "collaborative-spreadsheet-engine",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/client",
+    "packages/backend"
+  ],
+  "scripts": {
+    "build:backend": "npm run build -w @spreadsheet/backend",
+    "dev": "concurrently \"npm run dev -w @spreadsheet/backend\" \"npm run dev -w @spreadsheet/client\"",
+    "build": "npm run build:backend && npm run build -w @spreadsheet/client",
+    "start": "npm run start -w @spreadsheet/backend"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

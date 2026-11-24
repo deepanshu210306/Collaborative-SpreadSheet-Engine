@@ -1,0 +1,10 @@
+{
+  "name": "@spreadsheet/backend",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "g++ -std=c++14 -O2 -Wall -Iinclude -o spreadsheet_server.exe src/main.cpp src/DependencyGraph.cpp src/TopoSort.cpp src/FormulaParser.cpp src/SpreadsheetEngine.cpp src/WebSocketServer.cpp -lws2_32",
+    "start": "node ../../scripts/run-backend.js",
+    "dev": "node ../../scripts/run-backend.js"
+  }
+}

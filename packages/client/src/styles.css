@@ -1,0 +1,181 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: #f5f5f5;
+  color: #1a1a1a;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  background: #1b5e3b;
+  color: white;
+}
+
+.header h1 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.header-meta {
+  display: flex;
+  gap: 16px;
+  font-size: 13px;
+}
+
+.status.connected { color: #4ade80; }
+.status.disconnected { color: #f87171; }
+
+.formula-bar {
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  background: white;
+  border-bottom: 1px solid #ddd;
+  gap: 8px;
+}
+
+.cell-ref {
+  font-weight: 600;
+  font-size: 13px;
+  min-width: 40px;
+  text-align: center;
+  color: #1b5e3b;
+}
+
+.fx {
+  font-style: italic;
+  color: #888;
+  font-size: 13px;
+}
+
+.formula-input {
+  flex: 1;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 6px 10px;
+  font-size: 13px;
+  font-family: 'Consolas', 'Courier New', monospace;
+  outline: none;
+}
+
+.formula-input:focus {
+  border-color: #1b5e3b;
+  box-shadow: 0 0 0 2px rgba(27, 94, 59, 0.15);
+}
+
+.grid-container {
+  flex: 1;
+  overflow: auto;
+  background: white;
+}
+
+.grid {
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: max-content;
+}
+
+.grid th,
+.grid td {
+  border: 1px solid #e0e0e0;
+  min-width: 100px;
+  height: 28px;
+  font-size: 13px;
+}
+
+.col-header {
+  background: #f0f0f0;
+  font-weight: 600;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  color: #555;
+}
+
+.row-header {
+  background: #f0f0f0;
+  font-weight: 600;
+  text-align: center;
+  min-width: 40px !important;
+  width: 40px;
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  color: #555;
+}
+
+.corner {
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  background: #e8e8e8;
+  min-width: 40px !important;
+  width: 40px;
+}
+
+.cell {
+  padding: 0 6px;
+  cursor: cell;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background: white;
+  transition: background 0.1s;
+}
+
+.cell:hover {
+  background: #f8fdf9;
+}
+
+.cell.selected {
+  outline: 2px solid #1b5e3b;
+  outline-offset: -2px;
+  background: #f0faf4;
+  z-index: 1;
+}
+
+.cell.error {
+  color: #dc2626;
+  font-weight: 500;
+}
+
+.cell.editing {
+  padding: 0;
+}
+
+.cell input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  padding: 0 6px;
+  font-size: 13px;
+  font-family: 'Consolas', 'Courier New', monospace;
+  outline: none;
+  background: #f0faf4;
+}
+
+.status-bar {
+  display: flex;
+  gap: 24px;
+  padding: 4px 16px;
+  background: #f0f0f0;
+  border-top: 1px solid #ddd;
+  font-size: 12px;
+  color: #666;
+}
