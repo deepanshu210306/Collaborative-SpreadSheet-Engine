@@ -1,10 +1,11 @@
 # Collaborative Spreadsheet Engine
 
-Real-time collaborative spreadsheet with a **full C++ backend** and a **React** frontend.
+Real-time collaborative spreadsheet with a **Node.js / JavaScript** backend and a **React** frontend.
 
 ## Tech Stack
 
-- **C++** — calculation engine + WebSocket collaboration server
+- **JavaScript** — calculation engine (DAG, topological sort, memory pooling, formulas)
+- **Node.js + WebSockets** — real-time collaboration server
 - **React** — browser spreadsheet UI
 
 ## Features
@@ -13,47 +14,33 @@ Real-time collaborative spreadsheet with a **full C++ backend** and a **React** 
 - Dependency graph + topological sort (incremental recompute)
 - Cycle detection (`#CYCLE!`)
 - Memory pooling
-- Real-time multi-user sync (C++ WebSocket, server-authoritative)
+- Real-time multi-user sync (WebSocket, server-authoritative)
 
 ## Quick Start
 
-Needs **Node.js** (for the React UI) and **g++** (MinGW on Windows).
-
 ```bash
 npm install
-npm run build:backend
 npm run dev
 ```
 
 - UI: http://localhost:5173
-- Backend: ws://localhost:3001
+- Server / WebSocket: http://localhost:3001
+
+Open two browser tabs to test collaboration.
 
 ## Structure
 
 ```
 packages/
-  backend/   C++ engine + WebSocket server
-  client/    React UI
-scripts/     Launches the C++ server
+  engine/   JS calc engine (topo sort, cycles, formulas)
+  server/   Node.js WebSocket server
+  client/   React UI
 ```
 
-## Collaboration
-
-1. `npm run dev`
-2. Open http://localhost:5173 in two tabs
-3. Edit cells — updates sync through the C++ backend
-
-## Docker (deploy / run without local g++)
-
-**Need:** [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed and running.
+## Docker
 
 ```bash
 docker compose up --build
 ```
 
-Open: **http://localhost:8080**
-
-Stop:
-```bash
-docker compose down
-```
+Open: **http://localhost:3001**

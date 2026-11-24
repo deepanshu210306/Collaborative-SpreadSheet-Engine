@@ -1,0 +1,13 @@
+{
+  "name": "@spreadsheet/server",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch src/index.js",
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "@spreadsheet/engine": "*",
+    "ws": "^8.18.0"
+  }
+}

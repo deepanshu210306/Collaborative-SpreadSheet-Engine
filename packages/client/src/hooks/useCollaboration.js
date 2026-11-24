@@ -2,13 +2,11 @@ import { useEffect, useRef, useCallback, useState } from 'react';
 
 function getWsUrl() {
   if (import.meta.env.VITE_WS_URL) return import.meta.env.VITE_WS_URL;
-  // Local npm run dev → talk to C++ on :3001
   if (import.meta.env.DEV) {
     return `ws://${window.location.hostname}:3001`;
   }
-  // Docker / production → same host, Nginx proxies /ws
   const proto = window.location.protocol === 'https:' ? 'wss' : 'ws';
-  return `${proto}://${window.location.host}/ws`;
+  return `${proto}://${window.location.host}`;
 }
 
 export function useCollaboration({ onMessage, onConnect, onDisconnect }) {
@@ -39,9 +37,7 @@ export function useCollaboration({ onMessage, onConnect, onDisconnect }) {
 
       ws.onmessage = (event) => {
         const msg = JSON.parse(event.data);
-        if (msg.type === 'init') {
-          setClientId(msg.clientId);
-        }
+        if (msg.type === 'init') setClientId(msg.clientId);
         callbacks.current.onMessage?.(msg);
       };
 
